@@ -1,0 +1,8 @@
+.rr-split-word { display: inline-block; }
+@media (prefers-reduced-motion: no-preference) {
+  .rr-in-view { animation: rr-in .5s ease backwards; }
+  .rr-in-view:nth-child(3n+2) { animation-delay: 75ms; }
+  .rr-in-view:nth-child(3n) { animation-delay: 150ms; }
+  .rr-in-view .rr-split-word { animation: rr-word-up .5s ease var(--word-delay) backwards; }
+}
+@keyframes rr-word-up { from { opacity: .24; transform: translateY(.25em); } }

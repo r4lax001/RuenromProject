@@ -488,3 +488,37 @@ footer small {
     background: white;
   }
 }
+
+.rr-click-sparkles {
+  position: fixed;
+  z-index: 2147483647;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+}
+.rr-click-sparkles i {
+  position: absolute;
+  inset: -5px auto auto -5px;
+  width: 10px;
+  height: 10px;
+  background: #ca9950;
+  clip-path: polygon(50% 0, 64% 36%, 100% 50%, 64% 64%, 50% 100%, 36% 64%, 0 50%, 36% 36%);
+  animation: rr-spark-out 520ms ease-out both;
+}
+.rr-click-sparkles i:nth-child(even) { background: #e6a2aa; width: 7px; height: 7px; }
+@keyframes rr-spark-out {
+  from { opacity: 1; transform: scale(.4); }
+  35% { opacity: 1; }
+  to { opacity: 0; transform: translate(var(--dx), var(--dy)) rotate(70deg) scale(.6); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rr-click-sparkles { display: none; }
+}
+
+img[data-image-loading] {
+  background: linear-gradient(105deg, #eeeae4 30%, #faf8f5 50%, #eeeae4 70%);
+  background-size: 220% 100%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  img[data-image-loading] { animation: cx-shimmer 1.5s linear infinite; }
+}

@@ -1,3 +1,4 @@
+import LoadingImage from "../../components/LoadingImage";
 import React, { useState } from "react";
 import {
   ArrowLeft,
@@ -57,7 +58,7 @@ export default function RoomDetailPage({ id, filters, go }) {
         onClick={() => setLightbox(true)}
         aria-label="เปิดภาพห้องพัก"
       >
-        <img src={room.image_url} alt={room.name} />
+        <LoadingImage src={room.image_url} alt={room.name} />
         <span>
           <Image />
           ดูภาพห้องพัก
@@ -97,7 +98,7 @@ export default function RoomDetailPage({ id, filters, go }) {
           </section>
           <section className="cx-section">
             <h2>Discover Bangkok</h2>
-            <img
+            <LoadingImage
               className="cx-location-image"
               src={homeData.places[1].image}
               alt="บรรยากาศประเทศไทย"
@@ -128,6 +129,7 @@ export default function RoomDetailPage({ id, filters, go }) {
           </div>
           <p className="cx-caption">ราคาแพ็กเกจและส่วนลดแสดงในขั้นตอนถัดไป</p>
           <ErrorBox message={availability.error} retry={availability.reload} />
+          {availability.loading && <Loading layout="rows" label="กำลังตรวจห้องว่าง" />}
           {!availability.loading && !availability.error && !available && (
             <p role="status">
               ห้องนี้ไม่ว่างสำหรับวันที่หรือจำนวนผู้เข้าพักที่เลือก กรุณาเปลี่ยนเงื่อนไข
@@ -158,7 +160,7 @@ export default function RoomDetailPage({ id, filters, go }) {
       </div>
       {lightbox && (
         <Dialog title={room.name} onClose={() => setLightbox(false)}>
-          <img className="cx-lightbox" src={room.image_url} alt={room.name} />
+          <LoadingImage className="cx-lightbox" src={room.image_url} alt={room.name} />
         </Dialog>
       )}
     </>

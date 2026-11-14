@@ -1,3 +1,4 @@
+import LoadingImage from "../../components/LoadingImage";
 import React from "react";
 import {
   ArrowRight,
@@ -106,7 +107,7 @@ export default function InfoPage({ page, user, go }) {
       <Heading label="THE RUENROM WAY" title="Less rush. More room.">
         พื้นที่พักใจในกรุงเทพฯ
       </Heading>
-      <img
+      <LoadingImage
         className="cx-about-photo"
         src={homeData.hero}
         alt="บรรยากาศห้องพักเรือนรมย์"

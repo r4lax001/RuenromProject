@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { api, day, money } from "../customer/shared";
+import React, { useState } from "react";
+import { useResource, Loading, ErrorBox, day, money } from "../customer/shared";
 import { Dialog } from "../components/home/Dialog";
 import { BookingDetails } from "./Bookings";
 export default function Payments({ run }) {
   const [detail, setDetail] = useState(null);
-  const [rows, setRows] = useState([]),
-    [range, setRange] = useState({ from: day(-30), to: day() });
-  const load = () =>
-    run(async () =>
-      setRows(await api("/payments?" + new URLSearchParams(range))),
-    );
-  useEffect(() => {
-    load();
-  }, []);
+  const [range, setRange] = useState({ from: day(-30), to: day() });
+  const [query, setQuery] = useState(new URLSearchParams(range).toString());
+  const resource = useResource("/payments?" + query);
+  const rows = resource.data || [];
+  function load() {
+    const next = new URLSearchParams(range).toString();
+    if (query === next) resource.reload();
+    else setQuery(next);
+  }
   const total = rows.reduce((n, p) => n + Number(p.amount), 0),
     room = rows.reduce(
       (n, p) =>
@@ -54,6 +54,7 @@ export default function Payments({ run }) {
           ส่งออก CSV
         </a>
       </form>
+      {resource.loading ? <Loading layout="rows" /> : resource.error ? <ErrorBox message={resource.error} retry={resource.reload} /> : <>
       <div className="promos">
         {[
           ["รับชำระรวม", total],
@@ -94,6 +95,7 @@ export default function Payments({ run }) {
           </tbody>
         </table>
       </div>
+      </>}
       {detail && (
         <Dialog title="เอกสารการรับชำระ" onClose={() => setDetail(null)}>
           <BookingDetails id={detail} />

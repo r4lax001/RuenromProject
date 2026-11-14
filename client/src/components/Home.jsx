@@ -1,15 +1,12 @@
+import LoadingImage from "./LoadingImage";
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
   CalendarDays,
-  Coffee,
-  Landmark,
   MapPin,
-  MoveUpRight,
   ShieldCheck,
   Tag,
-  Waves,
   Headset,
 } from "lucide-react";
 import { homeData } from "../data/home";
@@ -25,11 +22,43 @@ const today = (offset = 0) =>
   }).format(new Date(Date.now() + offset * 86400000));
 
 import { Dialog } from "./home/Dialog";
+import HomeSkeleton from "./home/HomeSkeleton";
+import Reviews from "./home/Reviews";
 import SearchBar from "./home/SearchBar";
 import RoomCard from "./home/FeaturedRoomCard";
 export { Dialog } from "./home/Dialog";
 export { HomeHeader } from "./home/HomeHeader";
-export default function Home({ onSearch }) {
+function HeroFilm() {
+  const video = useRef(null);
+
+  useEffect(() => {
+    const media = video.current;
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    function syncPlayback() {
+      if (preference.matches) media.pause();
+      else media.play().catch(() => {});
+    }
+    syncPlayback();
+    preference.addEventListener("change", syncPlayback);
+    return () => preference.removeEventListener("change", syncPlayback);
+  }, []);
+
+  return (
+    <video
+      ref={video}
+      className="rr-hero-photo"
+      src="/media/room-tour.mp4"
+      poster="/media/room-tour.jpg"
+      muted
+      loop
+      playsInline
+      preload="none"
+      aria-hidden="true"
+    />
+  );
+}
+
+export default function Home({ onSearch, user }) {
   const featured = useResource("/rooms");
   const featuredRooms = homeData.rooms.flatMap((template) => {
     const room = featured.data
@@ -49,41 +78,19 @@ export default function Home({ onSearch }) {
       : [];
   });
   const [place, setPlace] = useState(null);
-  const root = useRef(null);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        }),
-      { threshold: 0.08 },
-    );
-    root.current
-      .querySelectorAll(".rr-reveal")
-      .forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
   return (
-    <div className="rr-home" ref={root}>
+    <div className="rr-home">
       <section className="rr-hero">
-        <img
-          className="rr-hero-photo"
-          src={homeData.hero}
-          alt="ห้องพักแสงอบอุ่นกับเตียงนุ่มสำหรับวันพักผ่อน"
-          fetchPriority="high"
-        />
+        <HeroFilm />
         <div className="rr-hero-shade" />
         <div className="rr-hero-content">
           <div className="rr-kicker rr-light-label">
             <span /> A QUIETER SIDE OF BANGKOK
           </div>
           <h1>
-            Somewhere to stay.
+            <span className="rr-headline-line">Somewhere to stay.</span>
             <br />
-            <em>Somewhere to belong.</em>
+            <em className="rr-headline-line">Somewhere to belong.</em>
           </h1>
           <p>พักกาย วางใจ ให้ทุกช่วงเวลาเป็นของคุณ</p>
           <a className="rr-hero-link" href="#rr-stays">
@@ -93,7 +100,7 @@ export default function Home({ onSearch }) {
         <div className="rr-hero-bottom">
           <span>THOUGHTFULLY DESIGNED. PERSONALLY YOURS.</span>
           <span>
-            20 ROOMS <span className="rr-slide-line" /> ONE RETREAT
+            {featured.data && <>{featured.data.length} ROOMS </>}<span className="rr-slide-line" /> ONE RETREAT
           </span>
         </div>
       </section>
@@ -104,7 +111,7 @@ export default function Home({ onSearch }) {
           ราคาชัดเจนก่อนยืนยัน
         </div>
       </div>
-      <section className="rr-section rr-reveal" id="rr-stays">
+      <section className="rr-section" id="rr-stays">
         <div className="rr-section-heading">
           <div>
             <div className="rr-kicker">THE ART OF REST</div>
@@ -115,8 +122,8 @@ export default function Home({ onSearch }) {
             ดูห้องพักทั้งหมด <ArrowUpRight />
           </button>
         </div>
+        {featured.loading && <HomeSkeleton />}
         <div className="rr-room-grid">
-          {featured.loading && <p role="status">กำลังโหลดห้องพัก…</p>}
           {featured.error && (
             <p role="alert">
               โหลดห้องพักไม่สำเร็จ <button onClick={featured.reload}>ลองใหม่</button>
@@ -139,7 +146,7 @@ export default function Home({ onSearch }) {
         </div>
       </section>
       <section className="rr-neighborhood" id="rr-neighborhood">
-        <div className="rr-section rr-reveal">
+        <div className="rr-section">
           <div className="rr-section-heading">
             <div>
               <div className="rr-kicker">BEYOND YOUR ROOM</div>
@@ -151,33 +158,22 @@ export default function Home({ onSearch }) {
             </span>
           </div>
           <div className="rr-place-grid">
-            {homeData.places.map((p) => {
-              const Icon = { waves: Waves, landmark: Landmark, coffee: Coffee }[
-                p.icon
-              ];
-              return (
-                <button
-                  className="rr-place"
-                  key={p.name}
-                  onClick={() => setPlace(p)}
-                >
-                  <img src={p.image} alt={p.thai} loading="lazy" />
-                  <span className="rr-place-shade" />
-                  <span className="rr-place-content">
-                    <Icon />
-                    <span>
-                      <strong>{p.name}</strong>
-                      <small>{p.thai}</small>
-                    </span>
-                    <MoveUpRight />
-                  </span>
-                </button>
-              );
-            })}
+            {homeData.places.map(p => (
+              <button type="button" key={p.name} className={`rr-place rr-place--${p.icon}`}
+                aria-haspopup="dialog" onClick={() => setPlace(p)}>
+                <LoadingImage src={p.image} alt="" loading="lazy" />
+                <span className="rr-place-shade" />
+                <span className="rr-place-content">
+                  <strong>{p.name}</strong>
+                  <small>{p.thai}</small>
+                  <span className="rr-place-action">สำรวจสถานที่ <ArrowRight /></span>
+                </span>
+              </button>
+            ))}
           </div>
         </div>
       </section>
-      <section className="rr-trust rr-section rr-reveal">
+      <section className="rr-trust rr-section">
         <div className="rr-kicker">LITTLE DETAILS. A BETTER STAY.</div>
         <div className="rr-trust-grid">
           {[
@@ -194,6 +190,7 @@ export default function Home({ onSearch }) {
           ))}
         </div>
       </section>
+      <Reviews user={user} />
       <footer className="rr-footer">
         <div className="rr-footer-main">
           <div>
@@ -221,7 +218,7 @@ export default function Home({ onSearch }) {
       </footer>
       {place && (
         <Dialog title={place.name} onClose={() => setPlace(null)}>
-          <img className="rr-dialog-photo" src={place.image} alt={place.thai} />
+          <LoadingImage className="rr-dialog-photo" src={place.image} alt={place.thai} />
           <p>{place.description}</p>
           <a
             className="rr-button"

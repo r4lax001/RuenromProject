@@ -1,3 +1,4 @@
+import LoadingImage from "../../components/LoadingImage";
 import React, { useState } from "react";
 import {
   Search,
@@ -190,7 +191,7 @@ export default function Rooms({ user }) {
                 </div>
                 <div className="rm-room-info">
                   {room.image_url ? (
-                    <img src={room.image_url} alt="" loading="lazy" />
+                    <LoadingImage src={room.image_url} alt="" loading="lazy" />
                   ) : (
                     <BedDouble />
                   )}

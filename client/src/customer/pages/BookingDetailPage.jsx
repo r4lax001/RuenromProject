@@ -52,7 +52,7 @@ export default function BookingDetailPage({ id, mode, user, go }) {
       setBusy(false);
     }
   }
-  if (loading) return <Loading />;
+  if (loading) return <Loading layout="rows" />;
   if (error) return <ErrorBox message={error} retry={reload} />;
   if (!b)
     return (

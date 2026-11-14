@@ -70,7 +70,7 @@ export default function BookingsPage({ user, go }) {
       </div>
       <ErrorBox message={error} retry={reload} />
       {loading ? (
-        <Loading />
+        <Loading layout="rows" />
       ) : (
         rows.map((b) => (
           <article className="cx-booking-card" key={b.id}>

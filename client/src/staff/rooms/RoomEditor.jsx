@@ -1,3 +1,4 @@
+import LoadingImage from "../../components/LoadingImage";
 import React, { useState } from "react";
 import { ImagePlus, Save } from "lucide-react";
 import { Dialog } from "../../components/home/Dialog";
@@ -117,7 +118,7 @@ export default function RoomEditor({ room, types, onClose, onSaved }) {
           <legend>รูปห้องพัก</legend>
           <div className="rm-upload">
             {form.image_url ? (
-              <img src={form.image_url} alt="ตัวอย่างรูปห้อง" />
+              <LoadingImage src={form.image_url} alt="ตัวอย่างรูปห้อง" />
             ) : (
               <ImagePlus size={32} />
             )}

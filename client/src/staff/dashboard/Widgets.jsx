@@ -1,3 +1,4 @@
+import { CountUp } from "../../components/ScrollEffects";
 import React, { useState, useId } from "react";
 import {
   ArrowUpRight,
@@ -46,7 +47,7 @@ export function KpiCard({
         <Icon />
       </span>
       <span className="sd-kpi-number">
-        {value}
+        <CountUp value={value} />
         <small>{suffix}</small>
       </span>
       <span className="sd-kpi-bottom">

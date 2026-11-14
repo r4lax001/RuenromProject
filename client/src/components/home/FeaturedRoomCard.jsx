@@ -1,3 +1,4 @@
+import LoadingImage from "../LoadingImage";
 import {
   ArrowUpRight,
   BedDouble,
@@ -19,7 +20,7 @@ export default function RoomCard({ room, onSelect }) {
   return (
     <article className="rr-room">
       <div className="rr-room-image">
-        <img src={room.image} alt={`ห้องพัก ${room.name}`} loading="lazy" />
+        <LoadingImage src={room.image} alt={`ห้องพัก ${room.name}`} loading="lazy" />
         <button
           className={`rr-favorite ${favorite ? "is-selected" : ""}`}
           aria-label={`บันทึก ${room.name}`}

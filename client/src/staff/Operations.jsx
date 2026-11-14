@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { api, useResource } from "../customer/shared";
+import { Loading, api, useResource } from "../customer/shared";
 import { BookingDetails } from "./Bookings";
 import { Dialog } from "../components/home/Dialog";
 const configurations = {
@@ -285,7 +285,7 @@ export default function Operations({ page, user }) {
         </p>
       )}
       {resource.loading ? (
-        <p>กำลังโหลด…</p>
+        <Loading layout="rows" />
       ) : resource.error ? (
         <p role="alert">{resource.error}</p>
       ) : page === "settings" ? (
@@ -410,7 +410,7 @@ export default function Operations({ page, user }) {
 function CustomerHistory({ email }) {
   const { data, loading, error } = useResource("/staff/bookings");
   const [selected, setSelected] = useState(null);
-  if (loading) return <p>กำลังโหลด…</p>;
+  if (loading) return <Loading layout="rows" />;
   if (error) return <p role="alert">{error}</p>;
   return selected ? (
     <>
@@ -434,7 +434,7 @@ function StockHistory({ id }) {
     `/staff/inventory/${id}/history`,
   );
   return loading ? (
-    <p>กำลังโหลด…</p>
+    <Loading layout="rows" />
   ) : error ? (
     <p role="alert">{error}</p>
   ) : (

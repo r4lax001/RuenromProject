@@ -121,6 +121,23 @@ app.post("/api/auth/logout", async (req, res) => {
     ]);
   res.clearCookie("session").json({ ok: true });
 });
+app.get("/api/reviews", async (req, res) => {
+  const [reviews] = await db.query(
+    "SELECT r.id,u.name,r.rating,r.body FROM reviews r JOIN users u ON u.id=r.user_id ORDER BY r.id DESC LIMIT 24",
+  );
+  res.json(reviews);
+});
+app.post("/api/reviews", auth("Customer"), async (req, res) => {
+  const { rating, body } = z.object({
+    rating: z.number().int().min(1).max(5),
+    body: z.string().trim().min(1).max(500),
+  }).parse(req.body);
+  const [result] = await db.execute(
+    "INSERT INTO reviews(user_id,rating,body) VALUES(?,?,?)",
+    [req.user.id, rating, body],
+  );
+  res.status(201).json({ id: result.insertId });
+});
 const date = z.iso.date();
 const bookingInput = z.object({
   roomId: z.number().int().positive(),

@@ -1,3 +1,4 @@
+import LoadingImage from "../../components/LoadingImage";
 import React, { useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
@@ -116,7 +117,7 @@ export default function CheckoutPage({ id, filters, user, go }) {
     user?.id,
     retryPrice,
   ]);
-  if (rooms.loading || catalog.loading) return <Loading />;
+  if (rooms.loading || catalog.loading) return <Loading layout="rows" />;
   if (rooms.error || catalog.error)
     return (
       <ErrorBox
@@ -288,7 +289,7 @@ export default function CheckoutPage({ id, filters, user, go }) {
           </p>
         </form>
         <aside className="cx-panel cx-sticky">
-          <img
+          <LoadingImage
             className="cx-summary-image"
             src={room.image_url}
             alt={room.name}
@@ -302,7 +303,7 @@ export default function CheckoutPage({ id, filters, user, go }) {
             {filters.checkIn} → {filters.checkOut}
           </p>
           {pricing ? (
-            <p role="status">กำลังตรวจสอบราคาและห้องว่าง…</p>
+            <Loading layout="rows" label="กำลังตรวจสอบราคาและห้องว่าง" />
           ) : quote ? (
             <PriceSummary quote={quote} />
           ) : (

@@ -1,0 +1,51 @@
+.rr-home .rr-reviews { padding-block: 56px; }
+.rr-home .rr-section.rr-review-intro { padding-block: 0; }
+.rr-reviews form, .rr-review-list article {
+  background: var(--rr-cream);
+  border: 1px solid var(--rr-border);
+  border-radius: 16px;
+  padding: 24px;
+}
+.rr-reviews form { display: grid; gap: 14px; max-width: 640px; margin-bottom: 24px; }
+.rr-reviews form label { display: grid; gap: 6px; margin: 0; }
+.rr-reviews select, .rr-reviews textarea { font: inherit; padding: 10px; }
+.rr-reviews textarea { resize: vertical; }
+.rr-home .rr-reviews form button { justify-self: start; color: white; background: var(--rr-navy); }
+.rr-review-list {
+  container-type: inline-size;
+  overflow: hidden;
+  padding: 16px 0 28px;
+  width: 100%;
+}
+.rr-review-track, .rr-review-group { display: flex; width: max-content; }
+.rr-review-group { gap: 16px; padding-right: 16px; }
+.rr-review-list article {
+  width: min(84cqw, 350px);
+  background: white;
+  overflow-wrap: anywhere;
+  border-top: 3px solid #b09464;
+  box-shadow: 0 7px 18px rgb(27 53 51 / 10%);
+  transition: transform .25s, box-shadow .25s;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .rr-review-list article:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 24px rgb(137 104 49 / 25%);
+  }
+}
+.rr-review-author { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.rr-home .rr-review-avatar { width: 48px; height: 48px; border-radius: 50%; }
+.rr-review-list blockquote { margin: 10px 0 0; line-height: 1.7; white-space: pre-line; }
+.rr-review-stars { color: #855e30; letter-spacing: 2px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .rr-review-track { animation: rr-review-drift 44s linear infinite; }
+}
+@keyframes rr-review-drift {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rr-review-list { overflow-x: auto; }
+  .rr-review-copy, .rr-review-group[aria-hidden="true"] { display: none; }
+}

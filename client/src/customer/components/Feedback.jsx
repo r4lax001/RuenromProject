@@ -1,10 +1,11 @@
+import { Words } from "../../components/ScrollEffects";
 import React from "react";
 import { AlertCircle, Search } from "lucide-react";
 export function Heading({ label, title, children }) {
   return (
     <div className="cx-heading">
       <span className="rr-kicker">{label}</span>
-      <h1>{title}</h1>
+      <h1><Words>{title}</Words></h1>
       {children && <p>{children}</p>}
     </div>
   );
@@ -35,13 +36,16 @@ export function ErrorBox({ message, retry }) {
     </div>
   ) : null;
 }
-export function Loading() {
+export function Loading({ layout = "cards", label = "กำลังโหลดข้อมูล" }) {
   return (
-    <div className="cx-skeletons" role="status" aria-label="กำลังโหลดข้อมูล">
-      {[1, 2, 3].map((n) => (
-        <div className="cx-skeleton" key={n} />
+    <div className={`cx-skeletons cx-loading-${layout}`} role="status" aria-label={label}>
+      {[1, 2, 3].map(n => (
+        <div className="cx-loading-item" key={n} aria-hidden="true">
+          {layout === "cards" && <span className="cx-loading-photo" />}
+          <span className="cx-loading-line" />
+          <span className="cx-loading-line" />
+        </div>
       ))}
-      <span className="cx-sr">กำลังโหลดข้อมูล</span>
     </div>
   );
 }

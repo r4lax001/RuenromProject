@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { api, useResource, money, day } from "../customer/shared";
+import { Loading, api, useResource, money, day } from "../customer/shared";
 import { Dialog } from "../components/home/Dialog";
 import { statuses } from "./dashboard/Widgets";
 export default function Bookings({ user }) {
@@ -106,7 +106,7 @@ export default function Bookings({ user }) {
       </div>
       {resource.error && <p role="alert">{resource.error}</p>}
       {resource.loading ? (
-        <p role="status">กำลังโหลดการจอง…</p>
+        <Loading layout="rows" label="กำลังโหลดการจอง" />
       ) : (
         <div className="table-wrap">
           <table>
@@ -437,7 +437,7 @@ export default function Bookings({ user }) {
 }
 export function BookingDetails({ id }) {
   const { data: b, loading, error } = useResource("/staff/bookings/" + id);
-  if (loading) return <p>กำลังโหลด…</p>;
+  if (loading) return <Loading layout="rows" />;
   if (error) return <p role="alert">{error}</p>;
   return (
     <div className="rm-form">

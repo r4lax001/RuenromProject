@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { api, day, money } from "../customer/shared";
+import React, { useState } from "react";
+import { useResource, Loading, ErrorBox, api, day, money } from "../customer/shared";
 const configs = {
   rooms: {
     number: "101",
@@ -46,15 +46,10 @@ const fieldLabels = {
   per_night: "คิดราคาต่อคืน",
 };
 export default function Management({ tab, run }) {
-  const [rows, setRows] = useState([]),
-    [edit, setEdit] = useState(null);
-  const load = () =>
-    run(async () =>
-      setRows(await api(tab === "status" ? "/staff/rooms" : "/admin/" + tab)),
-    );
-  useEffect(() => {
-    load();
-  }, []);
+  const resource = useResource(tab === "status" ? "/staff/rooms" : "/admin/" + tab);
+  const rows = resource.data || [];
+  const load = resource.reload;
+  const [edit, setEdit] = useState(null);
   async function save(e) {
     e.preventDefault();
     await run(async () => {
@@ -64,6 +59,8 @@ export default function Management({ tab, run }) {
       await load();
     });
   }
+  if (resource.loading) return <Loading layout="rows" />;
+  if (resource.error) return <ErrorBox message={resource.error} retry={load} />;
   return (
     <>
       {configs[tab] && (

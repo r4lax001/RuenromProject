@@ -1,3 +1,4 @@
+import LoadingImage from "../../components/LoadingImage";
 import React, { useState } from "react";
 import {
   ArrowRight,
@@ -18,7 +19,7 @@ export default function AuthPage({ mode, go, onLogin, returnTo }) {
   return (
     <div className="cx-auth">
       <div className="cx-auth-image">
-        <img src={homeData.hero} alt="ห้องพักเรือนรมย์" />
+        <LoadingImage src={homeData.hero} alt="ห้องพักเรือนรมย์" />
         <div>
           <span className="rr-kicker">WELCOME TO RUENROM</span>
           <h2>

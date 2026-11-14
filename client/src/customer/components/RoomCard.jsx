@@ -1,3 +1,4 @@
+import LoadingImage from "../../components/LoadingImage";
 import React from "react";
 import { ArrowRight, Heart } from "lucide-react";
 import { money, nights } from "../lib/format";
@@ -8,7 +9,7 @@ export function RoomCard({ room, filters, go, saved, toggle }) {
   return (
     <article className="cx-room">
       <div className="cx-room-photo">
-        <img src={room.image_url} alt={room.name} loading="lazy" />
+        <LoadingImage src={room.image_url} alt={room.name} loading="lazy" />
         <button
           className="cx-heart"
           onClick={() => toggle(key)}

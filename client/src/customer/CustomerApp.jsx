@@ -102,7 +102,7 @@ export default function CustomerApp({ renderStaff }) {
       />
     );
   else if (page === "home")
-    content = <Home onSearch={(f) => go("/rooms", f)} />;
+    content = <Home user={user} onSearch={(f) => go("/rooms", f)} />;
   else if (page === "rooms" || page === "favorites")
     content = (
       <RoomsPage
