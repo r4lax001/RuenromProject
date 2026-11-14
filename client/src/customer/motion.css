@@ -1,0 +1,136 @@
+/* Quiet, one-shot interactions. No looping decoration or layout shifts. */
+:root {
+  --motion-fast: 220ms;
+  --motion-ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+  --button-sheen: rgba(255, 255, 255, 0.12);
+}
+:is(.cx-app, .rr-home, .rr-header, .rr-dialog) .rr-button {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition:
+    transform var(--motion-fast) var(--motion-ease),
+    background-color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
+}
+/* Only the gold navigation/action buttons get the light sweep. */
+.rr-button:not(.cx-confirm):not(.cx-danger)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    110deg,
+    transparent 25%,
+    var(--button-sheen) 50%,
+    transparent 75%
+  );
+  transform: translateX(-120%);
+}
+.rr-button svg {
+  transition: transform var(--motion-fast) var(--motion-ease);
+}
+.cx-room,
+.rr-room {
+  transition:
+    transform 260ms var(--motion-ease),
+    border-color 260ms ease,
+    box-shadow 260ms ease;
+}
+.cx-room-photo {
+  overflow: hidden;
+}
+.cx-room-photo img {
+  transition: transform 300ms var(--motion-ease);
+}
+.cx-heart svg,
+.rr-favorite svg {
+  transition: transform var(--motion-fast) var(--motion-ease);
+}
+.cx-heart[aria-pressed="true"] svg,
+.rr-favorite.is-selected svg {
+  animation: favorite-pop 280ms var(--motion-ease);
+}
+.rr-dialog[open] {
+  animation: dialog-arrive 220ms var(--motion-ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  :is(.cx-app, .rr-home, .rr-header, .rr-dialog)
+    .rr-button:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(26, 48, 57, 0.12);
+  }
+  .rr-button:not(.cx-confirm):not(.cx-danger):not(:disabled):hover::after {
+    animation: button-sheen 550ms ease-out;
+  }
+  .rr-button:not(:disabled):hover
+    :is(.lucide-arrow-right, .lucide-arrow-up-right) {
+    transform: translateX(3px);
+  }
+  .cx-room:hover,
+  .rr-home .rr-room:hover {
+    transform: translateY(-4px);
+    border-color: var(--rr-gold);
+    box-shadow: 0 10px 24px rgba(26, 48, 57, 0.08);
+  }
+  .cx-room:hover .cx-room-photo img {
+    transform: scale(1.035);
+  }
+  .cx-heart:hover svg,
+  .rr-favorite:hover svg {
+    transform: scale(1.12);
+  }
+}
+.cx-room:focus-within,
+.rr-room:focus-within {
+  border-color: var(--rr-gold);
+}
+:is(.cx-app, .rr-home, .rr-header, .rr-dialog)
+  .rr-button:not(:disabled):active {
+  transform: translateY(0) scale(0.98);
+}
+@keyframes button-sheen {
+  to {
+    transform: translateX(120%);
+  }
+}
+@keyframes favorite-pop {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.25);
+  }
+}
+@keyframes dialog-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.cx-app, .rr-home, .rr-header, .rr-dialog) *,
+  :is(.cx-app, .rr-home, .rr-header, .rr-dialog) *::after,
+  .rr-dialog[open] {
+    animation: none !important;
+    transition: none !important;
+  }
+  :is(.cx-app, .rr-home, .rr-header, .rr-dialog) .rr-button,
+  .cx-room,
+  .rr-home .rr-room,
+  .cx-room-photo img,
+  .cx-heart svg,
+  .rr-favorite svg,
+  .rr-button svg {
+    transform: none !important;
+  }
+  .rr-button::after {
+    display: none;
+  }
+}

@@ -1,0 +1,490 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600&family=Playfair+Display:wght@400;500&display=swap");
+
+:root {
+  font-family: "Noto Sans Thai", sans-serif;
+  color: #1a3039;
+  background: #faf9f6;
+  font-size: 14px;
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+.button {
+  cursor: pointer;
+  border: 1px solid #dcd8ce;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+button:hover,
+.button:hover {
+  background: #ede6da;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.gold {
+  background: #a57c4d;
+  color: white;
+  border-color: #a57c4d;
+}
+
+.gold:hover {
+  background: #89633c;
+}
+
+header {
+  padding: 24px 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  gap: 24px;
+}
+
+.brand {
+  font-family: Georgia, serif;
+  font-size: 26px;
+  letter-spacing: 4px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand span {
+  display: block;
+  font: 9px sans-serif;
+  letter-spacing: 3px;
+  margin-top: 5px;
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+nav button {
+  border: 0;
+}
+
+h1 {
+  font-size: 42px;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: 500;
+}
+
+h3 {
+  font-weight: 500;
+}
+
+p {
+  line-height: 1.9;
+}
+
+small {
+  font-size: 11px;
+  color: #6b777b;
+}
+
+main {
+  max-width: 1240px;
+  margin: auto;
+  padding: 48px 28px;
+  min-height: 60vh;
+}
+
+.hero {
+  min-height: 540px;
+  color: white;
+  padding: 75px 8%;
+  background:
+    linear-gradient(90deg, #102e3ce8, #102e3c22),
+    url("https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=2000&q=85")
+      center/cover;
+}
+
+.hero h1 {
+  font-size: 58px;
+}
+
+.hero em {
+  font-style: normal;
+  color: #dfc3a0;
+}
+
+.eyebrow {
+  color: #a57c4d;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+}
+
+.hero .eyebrow {
+  color: #dfc3a0;
+}
+
+.hero p {
+  color: #e8e6e1;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.cards article {
+  background: #fff;
+  border: 1px solid #e5e1d9;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.cards img {
+  width: 100%;
+  height: 225px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 22px;
+}
+
+.card-body h3 {
+  font:
+    23px Georgia,
+    serif;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+.row button {
+  padding: 8px;
+  border: 0;
+  color: #a57c4d;
+}
+
+.search {
+  background: white;
+  padding: 24px;
+  display: flex;
+  align-items: end;
+  gap: 20px;
+  flex-wrap: wrap;
+  border: 1px solid #e5e1d9;
+  border-radius: 10px;
+  margin: 24px 0 32px;
+}
+
+.search label {
+  flex: 1;
+  min-width: 150px;
+  margin: 0;
+}
+
+label {
+  display: block;
+  margin: 14px 0;
+  font-size: 12px;
+}
+
+input,
+select,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dcd8ce;
+  border-radius: 5px;
+  color: inherit;
+  background: white;
+  margin-top: 7px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #b89461;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.check input {
+  width: 18px;
+  margin: 0;
+}
+
+.narrow {
+  max-width: 500px;
+  padding-top: 70px;
+}
+
+.narrow form button {
+  width: 100%;
+  margin: 16px 0;
+}
+
+section {
+  margin-bottom: 28px;
+}
+
+main > section {
+  margin-top: 56px;
+}
+
+.promos {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 24px 0;
+}
+
+.promos article {
+  flex: 1;
+  min-width: 150px;
+  padding: 24px;
+  border: 1px solid #e5e1d9;
+  background: white;
+  border-radius: 8px;
+}
+
+.promos h2 {
+  color: #a57c4d;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: #0a202cb0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal {
+  background: #faf9f6;
+  border-radius: 12px;
+  width: 650px;
+  max-height: 90vh;
+  overflow: auto;
+  padding: 32px;
+  margin: 0;
+}
+
+.close {
+  float: right;
+}
+
+.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.summary {
+  background: #f0e9dc;
+  padding: 18px;
+  border-radius: 6px;
+  margin: 18px 0;
+}
+
+.alert {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  background: #e4efe6;
+  color: #20402a;
+  padding: 16px 24px;
+  box-shadow: 0 4px 24px #0002;
+  max-width: 90vw;
+  border-radius: 8px;
+}
+
+.alert.error {
+  background: #ffeddf;
+  color: #84371b;
+}
+
+.alert button {
+  padding: 0 10px;
+  margin-left: 10px;
+  border: 0;
+}
+
+.tabs {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 24px 0;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  font-size: 12px;
+}
+
+td,
+th {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid #e5e1d9;
+  vertical-align: top;
+  min-width: 130px;
+}
+
+td small {
+  display: block;
+  margin-top: 6px;
+}
+
+td button {
+  font-size: 11px;
+  padding: 6px;
+  margin: 3px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 5px 9px;
+  background: #eee6da;
+  border-radius: 20px;
+}
+
+footer {
+  padding: 50px 8%;
+  background: #16313e;
+  color: #e6e1d9;
+}
+
+footer small {
+  color: #c1c9c9;
+}
+
+@media (max-width: 800px) {
+  header {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+  }
+
+  .hero {
+    min-height: 480px;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 520px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .two {
+    grid-template-columns: 1fr;
+  }
+
+  .modal {
+    padding: 20px;
+  }
+
+  main {
+    padding: 32px 18px;
+  }
+
+  nav {
+    gap: 0;
+  }
+
+  nav button {
+    font-size: 12px;
+    padding: 8px;
+  }
+}
+
+@media print {
+  header,
+  footer,
+  button,
+  .tabs,
+  .alert,
+  .search {
+    display: none !important;
+  }
+
+  main {
+    padding: 0;
+  }
+
+  table {
+    font-size: 10px;
+  }
+
+  td,
+  th {
+    min-width: 0;
+    padding: 8px;
+  }
+
+  .table-wrap {
+    overflow: visible;
+  }
+
+  body {
+    background: white;
+  }
+}

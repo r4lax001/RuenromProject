@@ -1,0 +1,153 @@
+/* Readability and keyboard/touch behavior shared by the finished screens. */
+.cx-home-main {
+  max-width: none;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+}
+.cx-home-main .rr-home section {
+  margin-bottom: 0;
+}
+.cx-skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 100;
+  padding: 12px 20px;
+  border-radius: 8px;
+  color: var(--rr-white);
+  background: var(--rr-navy);
+  transform: translateY(-160%);
+}
+.cx-skip-link:focus {
+  transform: translateY(0);
+}
+.rr-nav .rr-mobile-logout {
+  display: none;
+}
+.cx-main:focus,
+.cx-home-main:focus {
+  outline: none;
+}
+.cx-app label,
+.cx-app .cx-caption,
+.cx-app .cx-status {
+  font-size: 12px;
+}
+.cx-caption,
+.cx-app label,
+.rr-search-note {
+  color: var(--rr-navy);
+}
+.rr-home .rr-room-location,
+.rr-home .rr-kicker,
+.rr-home .rr-field-label {
+  font-size: 10px;
+}
+.rr-home .rr-room p,
+.rr-home .rr-section-heading p,
+.rr-home .rr-trust-grid p {
+  font-size: 12px;
+}
+.rr-home .rr-search-note {
+  font-size: 11px;
+}
+.rr-home .rr-room-bottom small,
+.rr-home .rr-amenities span span {
+  font-size: 11px;
+}
+.cx-app .cx-heart,
+.rr-home .rr-favorite,
+.rr-header .rr-icon,
+.rr-header .rr-account {
+  min-width: 44px;
+  min-height: 44px;
+}
+.cx-app .cx-heart,
+.rr-home .rr-favorite {
+  display: grid;
+  place-items: center;
+}
+.rr-nav button,
+.rr-nav a {
+  min-height: 44px;
+}
+.rr-dialog {
+  max-height: calc(100dvh - 32px);
+}
+.cx-app input,
+.cx-app select,
+.cx-app textarea {
+  scroll-margin-top: 24px;
+}
+.cx-error {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 900px) {
+  .rr-nav .rr-mobile-logout {
+    display: inline-flex;
+  }
+  .rr-header .rr-desktop-logout {
+    display: none;
+  }
+  .rr-nav.is-open {
+    max-height: calc(100dvh - 88px);
+    overflow-y: auto;
+  }
+}
+@media (max-width: 640px) {
+  .rr-header {
+    gap: 8px;
+    padding-inline: 16px;
+  }
+  .rr-header .rr-logo {
+    flex: 1;
+  }
+  .rr-header .rr-header-actions {
+    gap: 4px;
+  }
+  .rr-header .rr-account span {
+    display: none;
+  }
+  .rr-home .rr-search-note {
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 10px;
+  }
+  .rr-home .rr-field-label {
+    font-size: 9px;
+    letter-spacing: 0;
+  }
+  .rr-home .rr-search-field strong {
+    font-size: 12px;
+    white-space: normal;
+  }
+  .rr-home .rr-search-field {
+    align-items: center;
+  }
+  .rr-home .rr-footer-links {
+    gap: 16px 24px;
+  }
+  .rr-home .rr-footer-links a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .cx-app input,
+  .cx-app select,
+  .cx-app textarea,
+  .rr-dialog input {
+    font-size: 16px;
+  }
+  .rr-home .rr-hero-content {
+    padding-inline: 20px;
+  }
+  .rr-home .rr-hero h1 {
+    font-size: clamp(36px, 9.5vw, 46px);
+  }
+}
+@media print {
+  .cx-skip-link {
+    display: none;
+  }
+}

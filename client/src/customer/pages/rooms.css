@@ -1,0 +1,77 @@
+/* Compact search results; favorites and Home keep their existing layouts. */
+.cx-results.cx-results--compact {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+.cx-results--compact .cx-room {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.cx-results--compact .cx-room-photo {
+  height: 176px;
+}
+.cx-results--compact .cx-room-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.cx-results--compact .rr-kicker {
+  font-size: 9px;
+  letter-spacing: 1.2px;
+}
+.cx-results--compact .cx-room h2 {
+  font-size: 24px;
+  line-height: 1.2;
+  min-height: 58px;
+  margin: 12px 0 0;
+}
+.cx-results--compact .cx-amenities {
+  justify-content: space-between;
+  gap: 8px;
+  margin: 16px 0;
+}
+.cx-results--compact .cx-amenities > span {
+  gap: 6px;
+}
+.cx-results--compact .cx-room-body .cx-row {
+  margin-top: auto;
+  align-items: stretch;
+  flex-direction: column;
+  gap: 12px;
+}
+.cx-results--compact .cx-price {
+  font-size: 26px;
+}
+.cx-results--compact .cx-caption {
+  margin: 6px 0 0;
+}
+.cx-app .cx-results--compact .cx-room-body .rr-button {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  font-size: 13px;
+}
+@media (max-width: 1099px) {
+  .cx-results.cx-results--compact {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+@media (max-width: 899px) {
+  .cx-results.cx-results--compact {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 599px) {
+  .cx-results.cx-results--compact {
+    grid-template-columns: 1fr;
+  }
+  .cx-results--compact .cx-room-photo {
+    height: 200px;
+  }
+  .cx-results--compact .cx-room h2 {
+    min-height: 0;
+  }
+}

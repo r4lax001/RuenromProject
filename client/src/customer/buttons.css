@@ -1,0 +1,183 @@
+/* Semantic action colors. Labels and icons retain meaning without color. */
+:root {
+  --favorite-color: #b5333d;
+  --favorite-hover: #942630;
+  --action-next: #8d653b;
+  --action-next-hover: #76512d;
+  --action-confirm: #23714d;
+  --action-confirm-hover: #195638;
+  --action-danger: #b5333d;
+  --action-danger-hover: #942630;
+  --action-danger-soft: #fff1f2;
+  --action-neutral: #475569;
+  --action-neutral-border: #94a3b8;
+  --action-neutral-soft: #f1f5f9;
+}
+
+.rr-home .rr-favorite,
+.rr-home .rr-favorite.is-selected,
+.cx-app .cx-heart,
+.cx-app .cx-heart[aria-pressed="true"] {
+  color: var(--favorite-color);
+}
+
+.rr-home .rr-favorite.is-selected svg {
+  fill: currentColor;
+}
+
+.rr-home .rr-favorite:hover,
+.cx-app .cx-heart:hover {
+  color: var(--favorite-hover);
+}
+
+.cx-app .rr-button,
+.rr-dialog .rr-button,
+.rr-home .rr-button,
+.rr-header .rr-button {
+  min-height: 48px;
+  padding: 14px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  border: 2px solid var(--button-color, var(--action-next));
+  background: var(--button-color, var(--action-next));
+  color: var(--rr-white);
+  box-shadow: 0 4px 12px rgba(26, 48, 57, 0.08);
+}
+
+.cx-app .rr-button:not(:disabled):hover,
+.rr-dialog .rr-button:not(:disabled):hover,
+.rr-home .rr-button:not(:disabled):hover,
+.rr-header .rr-button:not(:disabled):hover {
+  border-color: var(--button-hover, var(--action-next-hover));
+  background: var(--button-hover, var(--action-next-hover));
+  box-shadow: 0 4px 12px rgba(26, 48, 57, 0.08);
+}
+
+.rr-button.cx-confirm {
+  --button-color: var(--action-confirm);
+  --button-hover: var(--action-confirm-hover);
+}
+
+.rr-button.cx-danger {
+  --button-color: var(--action-danger);
+  --button-hover: var(--action-danger-hover);
+}
+
+.cx-outline {
+  min-height: 46px;
+  border-color: var(--action-neutral-border);
+  background: var(--action-neutral-soft);
+  color: var(--action-neutral);
+  font-weight: 600;
+}
+
+.cx-cancel,
+.cx-app .cx-cancel,
+.rr-dialog .cx-cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 14px 20px;
+  border: 2px solid var(--action-danger);
+  border-radius: 8px;
+  background: var(--action-danger-soft);
+  color: var(--action-danger);
+  font: 600 14px/1.5 var(--rr-ui);
+  text-decoration: none;
+}
+
+.cx-cancel svg {
+  color: currentColor;
+}
+
+.cx-cancel:not(:disabled):hover {
+  background: var(--action-danger);
+  color: var(--rr-white);
+  box-shadow: none;
+}
+
+.cx-confirm-actions {
+  padding-top: 24px;
+  margin-top: 24px;
+  border-top: 1px solid var(--rr-border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.cx-confirm-actions button {
+  width: 100%;
+  font-size: 14px !important;
+}
+
+.cx-confirm-actions svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.5;
+}
+
+.rr-dialog .rr-close {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--action-neutral-border);
+  background: var(--action-neutral-soft);
+  color: var(--action-neutral);
+}
+
+.rr-dialog>h2 {
+  padding-right: 24px;
+}
+
+.rr-dialog form>.rr-button,
+.rr-dialog .rr-counter+.rr-button {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.cx-app .rr-button:focus-visible,
+.rr-dialog button:focus-visible,
+.cx-cancel:focus-visible,
+.cx-outline:focus-visible {
+  outline: 3px solid var(--button-color, var(--action-next));
+  outline-offset: 4px;
+}
+
+.cx-cancel:focus-visible {
+  outline-color: var(--action-danger);
+}
+
+.cx-outline:not(:disabled):hover {
+  border-color: var(--action-neutral);
+  background: var(--rr-white);
+  color: var(--action-neutral);
+}
+
+.cx-app button:disabled,
+.rr-dialog button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+@media (max-width: 600px) {
+  .cx-confirm-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .cx-confirm-actions .rr-button {
+    grid-row: 1;
+  }
+
+  .cx-app .rr-button,
+  .rr-dialog .rr-button {
+    padding: 12px 16px;
+  }
+
+  .rr-home .rr-search-submit {
+    font-size: 12px;
+    padding: 12px;
+  }
+}

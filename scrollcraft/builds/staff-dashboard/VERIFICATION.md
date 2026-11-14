@@ -1,0 +1,11 @@
+# Verification, 14 November 2026
+- Scroll Craft: live-surface design on explicitly labelled sample data. Brief in BRIEF.md. Restrained entry motion, no scroll hijacking or animated fake counters. Reduced-motion CSS disables transitions/animations; real-device motion preference not tested.
+- Impeccable static scan: one warning, Inter. Retained because explicitly requested. Raw output in impeccable.json. This is not a full WCAG certification.
+- Browser: desktop light/dark inspected; period selection updates total, series and weekday bars; Daniel search isolates one record; booking dialog shows matching data; mobile drawer opens/closes. At measured CSS viewport 380px, scrollWidth equals clientWidth; responsive cards visible.
+- CSV export verified: ruenrom-demo-revenue-7-days.csv downloaded successfully.
+- Console: no errors in final check.
+- Existing unit suite: 13/13 passed. Production build passed.
+- No dashboard API wiring or data mutations. Existing back office retained behind explicit button. Secondary modules and create-booking quick action are design placeholders, not completed workflows. Period selector currently offers 7/30-day presets; arbitrary custom ranges are not implemented.
+- Components: Navigation.jsx (Sidebar, Topbar), Widgets.jsx (KpiCard, RevenueChart, WeekdayBars, OccupancyGauge, TaskList, RoomStatusStrip, BookingsTable, skeleton), StaffDashboard.jsx composition, dashboard.mock.ts data contract, dashboard.css scoped tokens/styles.
+- Feel check: orientation → comparison → prioritisation → booking detail. Main chart is the visual focus. Full-width booking table provides the ending; no dead pinned scroll.
+- FFmpeg and skill-specific Playwright unavailable; no video required, browser QA used CUA. No generated assets.
